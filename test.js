@@ -1,21 +1,10 @@
-var test=(function(){
-    var n1=function(){
-        // ...
-    }
-    var n2=function(){
-        // ...
-    }
-    return{
-        n1:n1,
-        n2:n2
-    };
-})();
+$(document).ready(function(){
 
-
-var test1=(function (mod) {
-
-    mod.n3=function () {
-    //    ....
+    var options = {
+        width: '300px',
+        height: '250px',
+        itemAmount: 4,
+        contentElement:'img'
     }
-    return mod;
-})(test);
+    $(".test").getCDShopComponent().carouselPanel();
+});
