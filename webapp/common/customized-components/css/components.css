@@ -1,0 +1,129 @@
+/*折叠面板*/
+.single-accordion-wrapper {
+    width: 300px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.accordion-title {
+    max-height: 25px;
+    line-height: 25px;
+    background-color: #566270;
+    text-align: center;
+    color: #FFF;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.accordion-content {
+    height: 150px;
+    text-align: left;
+    background-color: #E0E3DA;
+    overflow-y: auto;
+}
+
+/*shade-text-input组件*/
+.shade-text-container {
+    position: relative;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    margin: 15px 5px 2px 5px;
+}
+
+
+input.shade-text-target {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #3C3F41;
+}
+
+input.shade-text-target:focus {
+    outline: none;
+    border-bottom: 1px solid #2196f3;
+}
+
+.shade-text {
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    font-size: 10px;
+}
+
+/*轮播图*/
+.carousel-container {
+    position: relative;
+    margin: 10px;
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#index0 {
+    flex: 1;
+    background-color: #2196f3;
+}
+
+#index1 {
+    flex: 1;
+    display: none;
+    background-color: brown;
+}
+
+#index2 {
+    flex: 1;
+    display: none;
+    background-color: darkgreen;
+}
+
+#index3 {
+    flex: 1;
+    display: none;
+    background-color: darkgreen;
+}
+
+.carousel-btn-group {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.round-btn {
+    width: 5px;
+    height: 5px;
+    margin: 5px;
+    float: left;
+    border-radius: 10px;
+}
+
+#round-btn0{
+    background-color: #FFF;
+}
+
+#round-btn1{
+    background-color: #242225;
+}
+
+#round-btn2{
+    background-color: #242225;
+}
+
+#round-btn3{
+    background-color: #242225;
+}
+
+
+
+.carousel-img {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+

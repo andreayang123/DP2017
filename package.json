@@ -1,0 +1,28 @@
+{
+  "name": "cdshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreayang123/cdshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreayang123/cdshop/issues"
+  },
+  "homepage": "https://github.com/andreayang123/cdshop#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "http-server": "^0.11.1",
+    "jquery": "^3.2.1",
+    "node": "^9.4.0"
+  },
+  "devDependencies": {
+    "express": "^4.16.2"
+  }
+}
