@@ -64,58 +64,11 @@ input.shade-text-target:focus {
     flex-flow: row nowrap;
 }
 
-
-#index0 {
-    
-}
-
-#index1 {
-    flex: 1;
-    display: none;
-}
-
-#index2 {
-    flex: 1;
-    display: none;
-}
-
-#index3 {
-    flex: 1;
-    display: none;
-}
-
 .carousel-btn-group {
     position: absolute;
     top: 80%;
     left: 50%;
-    margin-left: -25px;
 }
-
-.round-btn {
-    width: 5px;
-    height: 5px;
-    margin: 5px;
-    float: left;
-    border-radius: 10px;
-}
-
-#round-btn0{
-    background-color: #FFF;
-}
-
-#round-btn1{
-    background-color: #242225;
-}
-
-#round-btn2{
-    background-color: #242225;
-}
-
-#round-btn3{
-    background-color: #242225;
-}
-
-
 
 .carousel-item {
     flex: 1;
@@ -132,6 +85,23 @@ input.shade-text-target:focus {
 .carousel-item-other {
     display: none;
     background-color: yellow;
+}
+
+.round-btn {
+    cursor: pointer;
+    width: 5px;
+    height: 5px;
+    margin: 5px;
+    float: left;
+    border-radius: 10px;
+}
+
+.round-btn-first {
+    background-color: #FFF;
+}
+
+.round-btn-other {
+    background-color: #242225;
 }
 
 

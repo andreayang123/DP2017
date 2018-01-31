@@ -121,67 +121,66 @@
                     return _targetEle;
                 },
                 carouselPanel: function(_options){
-                    /*
-                    *configOptions配置对象：
-                    *
-                    *
-                    *
-                    */
                     /*定义一个标签的id选择器值组成的数组*/
-                    var itemIdSelectors = [];
+                    var cpNum = $("[cpid]").length+1;
+                    var currentPanel = "[cpid='"+cpNum+"'] ";
+                    var itemFlags = [];
+                    var rbFlags = [];
                     var itemGroupTpl = "";
+                    var roundBtnGroupTpl = "";
                     var defaultConfig = {
                         width: '300px',
                         height: '250px',
                         itemAmount: 4,
-                        contentElement:'img'
+                        contentTpl: []
                     }
 
                     $.extend(defaultConfig,_options);
                     for(var i = 0; i < defaultConfig.itemAmount; i++){
                         if(i == 0){
-                            itemIdSelectors.push("#ci"+i);
-                            itemGroupTpl += "<"+defaultConfig.contentElement+"  id=\"ci"+i+"\""+"  class=\"carousel-item  carousel-item-first\"/>";
+                            itemFlags.push("[itemflag=\'ci"+i+"\']");
+                            rbFlags.push("[rbflag=\'rb"+i+"\']");
+                            itemGroupTpl += "<div itemflag=\"ci"+i+"\""+"  class=\"carousel-item  carousel-item-first\">"+defaultConfig.contentTpl[i]+"</div>\n";
+                            roundBtnGroupTpl += "<div rbflag=\"rb"+i+"\""+"  class=\"round-btn  round-btn-first\"></div>\n";
                         }else{
-                            itemIdSelectors.push("#ci"+i);
-                            itemGroupTpl += "<"+defaultConfig.contentElement+"  id=\"ci"+i+"\""+"  class=\"carousel-item  carousel-item-other\"/>";
+                            itemFlags.push("[itemflag=\'ci"+i+"\']");
+                            rbFlags.push("[rbflag=\'rb"+i+"\']");
+                            itemGroupTpl += "<div itemflag=\"ci"+i+"\""+"  class=\"carousel-item  carousel-item-other\">"+defaultConfig.contentTpl[i]+"</div>\n";
+                            roundBtnGroupTpl += "<div  rbflag=\"rb"+i+"\""+"  class=\"round-btn  round-btn-other\"></div>\n";
                         }
                             
                     }
-                    $(".sb").html(itemGroupTpl);
-                    var tpl = "<div class=\"carousel-container\">\n" +itemGroupTpl+
-                        "    <div class=\"carousel-btn-group\">\n" +
-                        "        <div id=\"round-btn0\" class=\"round-btn\"></div>\n" +
-                        "        <div id=\"round-btn1\" class=\"round-btn\"></div>\n" +
-                        "        <div id=\"round-btn2\" class=\"round-btn\"></div>\n" +
-                        "        <div id=\"round-btn3\" class=\"round-btn\"></div>\n" +
+
+                    var tpl = "<div cpid=\""+cpNum+"\""+
+                        "class=\"carousel-container\">\n" +itemGroupTpl+
+                        "    <div class=\"carousel-btn-group\">\n" + roundBtnGroupTpl+
                         "    </div>\n" +
                         "</div>";
-                    _targetEle.append(tpl);
-                   
+                    _targetEle.html(tpl);
+                   $(currentPanel+".carousel-btn-group").css("margin-left",-defaultConfig.itemAmount*15/2+"px")
                     /*启动轮播图定时器*/
                     var timer = startCarouselTimer();
                     function startCarouselTimer() {
                         /*将setInterval的返回值直接返回，便于其他程序终止定时器操作*/
                         return setInterval(function () {
                             var val;
-                            for (var i = 0; i < itemIdSelectors.length; i++) {
+                            for (var i = 0; i < itemFlags.length; i++) {
                                 /*获取当前显示的那个img元素的display属性*/
-                                val = $(itemIdSelectors[i]).css("display");
+                                val = $(currentPanel+itemFlags[i]).css("display");
                                 /*这个条件分支包含了所有当前显示的不是最后一个图片元素的情况*/
-                                if (val != "none" && i + 1 < itemIdSelectors.length) {
-                                    $(itemIdSelectors[i]).hide();
-                                    $(".round-btn:eq(" + i + ")").css("backgroundColor", "#242225");
-                                    $(itemIdSelectors[i + 1]).show();
-                                    $(".round-btn:eq(" + (i + 1) + ")").css("backgroundColor", "#FFF");
+                                if (val != "none" && i + 1 < itemFlags.length) {
+                                    $(currentPanel+itemFlags[i]).hide();
+                                    $(currentPanel+rbFlags[i]).css("backgroundColor", "#242225");
+                                    $(currentPanel+itemFlags[i + 1]).show();
+                                    $(currentPanel+rbFlags[i+1]).css("backgroundColor", "#FFF");
                                     /*更新完视图后，通过break语句跳出for循环*/
                                     break;
-                                } else if (val != "none" && i + 1 == itemIdSelectors.length) {
+                                } else if (val != "none" && i + 1 == itemFlags.length) {
                                     /*这个条件分支用来处理当前显示图片是最后一个图片的情况*/
-                                    $(itemIdSelectors[i]).hide();
-                                    $(".round-btn:eq(" + i + ")").css("backgroundColor", "#242225");
-                                    $(itemIdSelectors[0]).show();
-                                    $(".round-btn:eq(" + 0 + ")").css("backgroundColor", "#FFF");
+                                    $(currentPanel+itemFlags[i]).hide();
+                                    $(currentPanel+rbFlags[i]).css("backgroundColor", "#242225");
+                                    $(currentPanel+itemFlags[0]).show();
+                                    $(currentPanel+rbFlags[0]).css("backgroundColor", "#FFF");
                                     break;
                                 }
                             }
@@ -191,17 +190,17 @@
                     /*给圆圈按钮绑定点击事件*/
                     $(".round-btn").click(function (event) {
                         /*通过event事件对象下面的currentTarget获取number型的id值*/
-                        var eleId = event.currentTarget.id;
+                        var eleId = event.currentTarget.attributes[0].nodeValue;
                         var _index = eleId.charAt(eleId.length - 1);
                         /*清除已经存在的定时器timer，以便不影响对界面样式的操作*/
                         clearInterval(timer);
-                        for (var i = 0; i < itemIdSelectors.length; i++) {
-                            var val = $(itemIdSelectors[i]).css("display");
+                        for (var i = 0; i < itemFlags.length; i++) {
+                            var val = $(currentPanel+itemFlags[i]).css("display");
                             if (val != "none") {
-                                $(itemIdSelectors[i]).hide();
-                                $("#ci" + _index).show();
-                                $(".round-btn:eq(" + i + ")").css("backgroundColor", "#242225");
-                                $("#round-btn" + _index).css("backgroundColor", "#FFF");
+                                $(currentPanel+itemFlags[i]).hide();
+                                $(currentPanel+itemFlags[_index]).show();
+                                $(currentPanel+rbFlags[i]).css("backgroundColor", "#242225");
+                                $(currentPanel+rbFlags[_index]).css("backgroundColor", "#FFF");
                                 /*根据当前点击btn元素更新完视图之后，重启定时器任务*/
                                 timer = startCarouselTimer();
                                 break;
