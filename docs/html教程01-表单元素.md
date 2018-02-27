@@ -1,0 +1,11 @@
+表单元素：
+1.input输入框包含以下属性
+①type属性，该属性用来指定输入框的类型，它可以指定为：button，checkbox，file，hidden，image，password，radio，reset，submit，text
+②value属性，该属性设置input的值
+③autocomplete属性，该属性用来设置表单是否从缓存读取数据
+④autofocus属性，该属性用来给输入框获取焦点
+⑤checked属性，该属性用来设置默认选中项
+⑥disabled属性，该属性用来禁用输入框
+⑦form属性，该属性用来设置当前表单属于哪个form标签
+⑧name属性，该属性用来给表单设置名称
+⑨placeholder属性，该属性用来设置输入框提示信息
